@@ -1,0 +1,3 @@
+1. redis 序列化使用 fastjson
+2. redis spring-data-redis 升级
+3. redis客户端 从 Jedis -> lettuce

@@ -1,0 +1,18 @@
+<hazelcast
+        xsi:schemaLocation="http://www.hazelcast.com/schema/config
+  http://www.hazelcast.com/schema/config/hazelcast-config-3.5.xsd"
+        xmlns="http://www.hazelcast.com/schema/config"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <network>
+        <public-address>localhost:5702</public-address>
+        <port>5702</port>
+        <join>
+            <multicast enabled="false" />
+            <!--<tcp-ip enabled="true">-->
+                <!--<required-member>localhost:5702</required-member>-->
+            <!--</tcp-ip>-->
+        </join>
+    </network>
+
+</hazelcast>

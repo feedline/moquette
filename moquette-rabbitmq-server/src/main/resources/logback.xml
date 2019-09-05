@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="2 seconds">
+	<property name="SYS_LOG_DIR" value="./logs" />
+	<property name="SYS_LOG_BAKUP_DIR" value="./logs/backup" />
+	<property name="pattern" value="%d [%t] %-5level %logger{32}:%L %X{X-B3-TraceId:-} %msg%n" />
+
+
+	<appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>
+				${pattern}
+			</pattern>
+		</layout>
+	</appender>
+
+	<appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/moquette/moquette.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/moquette/moquette.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>5MB</maxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<logger name="org.springframework" level="INFO" />
+	<logger name="io.lettuce" level="INFO" />
+	<logger name="io.moquette" level="INFO" />
+	<logger name="io.moquette.spi.impl.ProtocolProcessor" level="INFO" />
+	<logger name="io.moquette.spi.impl.ProtocolProcessorBootstrapper" level="INFO" />
+
+	<root level="DEBUG">
+		<appender-ref ref="consoleLog" />
+		<appender-ref ref="rollingFile" />
+	</root>
+</configuration>
